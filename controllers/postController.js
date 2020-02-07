@@ -1,5 +1,7 @@
 const Post = require("../models/Post");
+const sendGrid = require("@sendgrid/mail");
 
+sendGrid.setApiKey(process.env.SENDGRIDAPIKEY);
 exports.viewCreateScreen = function(req, res) {
   res.render("create-post");
   // we can get rid of the SECOND ARGUMENT AFTER setting up app.use to pass the user data. PS: I had to add a second Parenthesis here
@@ -14,6 +16,13 @@ exports.create = function(req, res) {
   post
     .create()
     .then(function(newId) {
+      sendGrid.send({
+        to: "rikkizp@gmail.com",
+        from: "test@test.com",
+        subject: "Congrats on Creating a New Post!",
+        text: "You did a great job of creating a post.",
+        html: "You did a <strong> great </strong> job of creating a post."
+      });
       req.flash("success", "New post successfully created.");
       req.session.save(() => res.redirect(`/post/${newId}`));
     })
