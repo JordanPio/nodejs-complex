@@ -32,6 +32,7 @@ In the project directory, you can run:
 ### `npm install`
 
 Download and install same versions of packages which were used and tested with the app.<br />
+Make sure you are in the root of project folder before typing the command
 
 ### `npm watch`
 
@@ -40,3 +41,13 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
+
+If you are running on Windows replace the "watch" inside package.json with the following.
+"watch": "start nodemon db --ignore frontend-js --ignore public/ && start webpack --watch"
+
+You will need to create your own .env file inside the root of project folder and setup a connection with your own MongoDB as well as JWT Token and sendgrid Key
+
+CONNECTIONSTRING=
+PORT=3000
+JWTSECRET=
+SENDGRIDAPIKEY=
